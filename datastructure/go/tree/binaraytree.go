@@ -1,7 +1,7 @@
 package tree
 
 /**
-* Binaray Tree
+# Binaray Tree
   - a tree which every node has at most two child nodes
 # Binary Search Tree
   * definition
