@@ -16,4 +16,3 @@ package hash
 */
 type HashTable struct {
 }
-
