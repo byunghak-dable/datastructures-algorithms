@@ -1,7 +1,7 @@
 package algo.queue;
 
 public interface QueueInterface<E> {
-  boolean offer();
+  void offer(E item);
   E poll();
   E peek();
   boolean isEmpty();

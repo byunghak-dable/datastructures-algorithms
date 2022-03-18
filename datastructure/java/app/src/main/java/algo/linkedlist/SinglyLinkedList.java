@@ -1,6 +1,8 @@
 package algo.linkedlist;
 
-public class SinglyLinkedList<T> implements LinkedListInterface<T> {
+import java.util.Iterator;
+
+public class SinglyLinkedList<T> implements LinkedListInterface<T>, Iterable<T> {
   class Node<K> {
     Node<K> next;
     K data;
@@ -159,5 +161,29 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
       System.out.println(trav.data);
       trav = trav.next;
     }
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    return new Iterator<T>() {
+      private Node<T> trav = head;
+
+      @Override
+      public boolean hasNext() {
+        return trav != null;
+      }
+
+      @Override
+      public T next() {
+        T data = trav.data;
+        trav = trav.next;
+        return data;
+      }
+
+      @Override
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
+    };
   }
 }
