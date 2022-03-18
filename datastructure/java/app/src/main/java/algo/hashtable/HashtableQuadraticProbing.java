@@ -56,4 +56,3 @@ public class HashtableQuadraticProbing<K, V> implements HashtableInterface<K, V>
     return false;
   }
 }
-
