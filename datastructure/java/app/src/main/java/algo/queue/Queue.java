@@ -17,4 +17,9 @@ public class Queue<E> implements QueueInterface<E>  {
 	public E peek() {
 		return null;
 	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
 }

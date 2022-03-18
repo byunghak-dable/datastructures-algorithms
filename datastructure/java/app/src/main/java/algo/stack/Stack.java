@@ -17,4 +17,9 @@ public class Stack<E> implements StackInterface<E> {
 		return null;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
 }
