@@ -1,10 +1,13 @@
 package algo.stack;
 
+import java.util.LinkedList;
+
 public class Stack<E> implements StackInterface<E> {
+  private LinkedList<E> list = new LinkedList<E>();
+  private int size = 0;
 
 	@Override
 	public void push(E item) {
-		
 	}
 
 	@Override
