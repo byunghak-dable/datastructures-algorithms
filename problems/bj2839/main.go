@@ -8,6 +8,7 @@ import (
 
 func main() {
 	result, err := solution(11)
+
 	if err != nil {
 		log.Println(err)
 		return
