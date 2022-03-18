@@ -1,7 +1,7 @@
 package algo;
 
-import algo.linkedlist.SinglyLinkedList;
 import algo.stack.ListStack;
+import algo.tree.BinarySearchTree;
 
 public class App {
   public static void main(String[] args) {
@@ -12,15 +12,22 @@ public class App {
     // singlyList.addLast("yes4");
     // singlyList.addFirst("first1");
     // singlyList.addFirst("first2");
-    ListStack<String> stack = new ListStack<String>();
-    System.out.println(stack.isEmpty());
-    stack.push("yes");
-    stack.push("yes1");
-    stack.push("yes2");
-    for (String string : stack) {
-      System.out.println(string);
+    // ListStack<String> stack = new ListStack<String>();
+    // System.out.println(stack.isEmpty());
+    // stack.push("yes");
+    // stack.push("yes1");
+    // stack.push("yes2");
+    // for (String string : stack) {
+    // System.out.println(string);
+    //
+    // }
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
+    bst.add(5);
+    bst.add(1);
+    bst.add(7);
+    bst.add(2);
 
-    }
+    System.out.println(bst.contains(0));
   }
 
 }
