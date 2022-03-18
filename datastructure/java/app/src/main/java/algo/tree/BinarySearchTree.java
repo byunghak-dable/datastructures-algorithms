@@ -1,6 +1,6 @@
 package algo.tree;
 
-public class BinaryTree<T extends Comparable<T>> {
+public class BinarySearchTree<T extends Comparable<T>> {
   class Node {
     Node left;
     Node right;

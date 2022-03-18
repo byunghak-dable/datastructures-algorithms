@@ -12,15 +12,15 @@ public class App {
     // singlyList.addLast("yes4");
     // singlyList.addFirst("first1");
     // singlyList.addFirst("first2");
-    // ListStack<String> stack = new ListStack<String>();
-    // System.out.println(stack.isEmpty());
-    // stack.push("yes");
-    // stack.push("yes1");
-    // stack.push("yes2");
-    // for (String string : stack) {
-    //   System.out.println(string);
-    //
-    // }
+    ListStack<String> stack = new ListStack<String>();
+    System.out.println(stack.isEmpty());
+    stack.push("yes");
+    stack.push("yes1");
+    stack.push("yes2");
+    for (String string : stack) {
+      System.out.println(string);
+
+    }
   }
 
 }
