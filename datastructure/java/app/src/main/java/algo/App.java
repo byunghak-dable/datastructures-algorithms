@@ -5,6 +5,7 @@ import algo.tree.BinarySearchTree;
 import algo.tree.TreeTraversalOrder;
 import java.util.Iterator;
 
+// binary heap => PQueue => Union Find
 public class App {
   public static void main(String[] args) {
     // SinglyLinkedList<String> singlyList = new SinglyLinkedList<String>();
