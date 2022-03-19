@@ -25,7 +25,7 @@ public class App {
     //
     // }
     BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
-    bst.add(5);
+          bst.add(5);
     bst.add(1);
     bst.add(7);
     bst.add(2);
