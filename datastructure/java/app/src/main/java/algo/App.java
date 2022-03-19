@@ -2,6 +2,8 @@ package algo;
 
 import algo.stack.ListStack;
 import algo.tree.BinarySearchTree;
+import algo.tree.TreeTraversalOrder;
+import java.util.Iterator;
 
 public class App {
   public static void main(String[] args) {
@@ -26,8 +28,10 @@ public class App {
     bst.add(1);
     bst.add(7);
     bst.add(2);
-
-    System.out.println(bst.contains(0));
+    Iterator<Integer> iter = bst.traverse(TreeTraversalOrder.LEVEL_ORDER);
+    while (iter.hasNext()) {
+      System.out.println(iter.next());
+    }
   }
 
 }

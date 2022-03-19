@@ -30,9 +30,9 @@ public class ListStack<E> implements StackInterface<E>, Iterable<E> {
     return list.size() == 0;
   }
 
-@Override
-public Iterator<E> iterator() {
-	return list.iterator();
-}
+  @Override
+  public Iterator<E> iterator() {
+    return list.iterator();
+  }
 
 }

@@ -13,4 +13,3 @@ public interface TreeInterface<T> {
 
   int height();
 }
-
