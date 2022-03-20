@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func main() {
+func  main() {
 	result, err := solution(38924)
 	if err != nil {
 		log.Println(err)

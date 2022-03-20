@@ -1,9 +1,9 @@
 package algo.linkedlist;
 
-public class DoublyLinkedList<T> implements LinkedListInterface {
-  class Node<T> {
-    Node<T> prev;
-    Node<T> next;
+public class DoublyLinkedList<T> implements LinkedListInterface<T> {
+  class Node {
+    Node prev;
+    Node next;
     T data;
   }
 
@@ -20,50 +20,50 @@ public class DoublyLinkedList<T> implements LinkedListInterface {
   }
 
   @Override
-  public void add(int index, Object data) {
+  public void add(int index, T data) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void addFirst(Object data) {
+  public void addFirst(T data) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void addLast(Object data) {
+  public void addLast(T data) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public boolean contains(Object data) {
+  public T remove(int index) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public T removeFirst() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public T removeLast() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public T get(int index) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean contains(T data) {
     // TODO Auto-generated method stub
     return false;
-  }
-
-  @Override
-  public Object get(int index) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Object remove(int index) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Object removeFirst() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Object removeLast() {
-    // TODO Auto-generated method stub
-    return null;
   }
 }
