@@ -1,17 +1,9 @@
 package algo.queue.pqueue;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-/**
- * # Insertion
- * - Shape : left first
- * - Invarient : swap the node with parent node
- * # Deletion
- * - Shape : should be balanced, if both side is even then swap with right side
- * - Invarient : swap the node with sammler child
- */
 // A min heap
 public class BinaryListHeap<T extends Comparable<T>> {
   private List<T> heap = null;
@@ -153,10 +145,7 @@ public class BinaryListHeap<T extends Comparable<T>> {
     }
   }
 
-  /**
-   * Left Child = 2 * parent + 1
-   * Right Chidl = 2 * parent + 2
-   */
+  /** Left Child = 2 * parent + 1 Right Chidl = 2 * parent + 2 */
   private int getParentIndex(int child) {
     return (child - 1) / 2;
   }
@@ -175,5 +164,4 @@ public class BinaryListHeap<T extends Comparable<T>> {
     heap.set(i, subject);
     heap.set(j, target);
   }
-
 }
