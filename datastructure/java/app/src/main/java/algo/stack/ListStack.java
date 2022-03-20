@@ -14,9 +14,7 @@ public class ListStack<E> implements StackInterface<E>, Iterable<E> {
 
   @Override
   public E pop() {
-    if (isEmpty()) 
-      throw new EmptyStackException();
-    
+    if (isEmpty()) throw new EmptyStackException();
     return list.pop();
   }
 
