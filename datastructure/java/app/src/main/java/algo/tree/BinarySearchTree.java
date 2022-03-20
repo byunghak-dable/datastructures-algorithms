@@ -2,9 +2,9 @@ package algo.tree;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.Stack;
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<T> {
   class Node {
@@ -20,8 +20,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   private Node root = null;
   private int size = 0;
 
-  public BinarySearchTree() {
-  }
+  public BinarySearchTree() {}
 
   public BinarySearchTree(T data) {
     this.root = new Node(data);
@@ -292,8 +291,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
     return new Iterator<T>() {
       @Override
       public boolean hasNext() {
-        if (expectSize != size) {
-          throw new ConcurrentModificationException();
+        if (expectSize != size) { throw new ConcurrentModificationException();
         }
         return root != null && !queue.isEmpty();
       }
@@ -319,5 +317,4 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
       }
     };
   }
-
 }

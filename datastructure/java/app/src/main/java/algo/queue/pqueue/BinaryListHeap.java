@@ -24,9 +24,8 @@ public class BinaryListHeap<T extends Comparable<T>> {
     int heapSize = items.length;
     heap = new ArrayList<T>(heapSize);
 
-    for (T item : items) {
-      heap.add(item);
-    }
+    for (T item : items) heap.add(item);
+
     // TODO heapify(sink)
     // heapify process, O(n)
   }
@@ -87,30 +86,23 @@ public class BinaryListHeap<T extends Comparable<T>> {
   }
 
   public T removeAt(int target) {
-    if (isEmpty()) {
-      return null;
-    }
+    if (isEmpty()) return null;
     int lastIndex = size() - 1;
 
-    if (target > lastIndex) {
-      throw new IllegalArgumentException();
-    }
+    if (target > lastIndex) throw new IllegalArgumentException();
 
     T removedNode = heap.get(target);
     swap(target, lastIndex);
     sink(target);
     heap.remove(lastIndex);
 
-    if (target == lastIndex) {
-      return removedNode;
-    }
+    if (target == lastIndex) return removedNode;
 
     T node = heap.get(target);
     swim(target);
 
-    if (node.equals(heap.get(target))) {
-      sink(target);
-    }
+    if (node.equals(heap.get(target))) sink(target);
+
     return removedNode;
   }
 
@@ -134,12 +126,9 @@ public class BinaryListHeap<T extends Comparable<T>> {
       int right = 2 * target + 2;
       int smallest = left; // assume that left is smallest
 
-      if (right < heapSize && isLess(right, left)) {
-        smallest = right;
-      }
-      if (left >= heapSize || isLess(target, smallest)) {
-        break;
-      }
+      if (right < heapSize && isLess(right, left)) smallest = right;
+      if (left >= heapSize || isLess(target, smallest)) break;
+
       swap(target, smallest);
       target = smallest;
     }

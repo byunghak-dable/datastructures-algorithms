@@ -1,8 +1,8 @@
 package algo.stack;
 
-import java.util.LinkedList;
 import java.util.EmptyStackException;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class ListStack<E> implements StackInterface<E>, Iterable<E> {
   private LinkedList<E> list = new LinkedList<E>();
@@ -14,9 +14,9 @@ public class ListStack<E> implements StackInterface<E>, Iterable<E> {
 
   @Override
   public E pop() {
-    if (isEmpty()) {
+    if (isEmpty()) 
       throw new EmptyStackException();
-    }
+    
     return list.pop();
   }
 
@@ -34,5 +34,4 @@ public class ListStack<E> implements StackInterface<E>, Iterable<E> {
   public Iterator<E> iterator() {
     return list.iterator();
   }
-
 }
