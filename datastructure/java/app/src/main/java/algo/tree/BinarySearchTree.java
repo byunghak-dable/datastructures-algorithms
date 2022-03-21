@@ -10,10 +10,10 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   class Node {
     Node left;
     Node right;
-    T data;
+    T elem;
 
-    Node(T data) {
-      this.data = data;
+    Node(T elem) {
+      this.elem = elem;
     }
   }
 
@@ -22,12 +22,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
 
   public BinarySearchTree() {}
 
-  public BinarySearchTree(T data) {
-    this.root = new Node(data);
+  public BinarySearchTree(T elem) {
+    this.root = new Node(elem);
   }
 
-  public BinarySearchTree(Node left, Node right, T data) {
-    this.root = new Node(data);
+  public BinarySearchTree(Node left, Node right, T elem) {
+    this.root = new Node(elem);
     this.root.left = left;
     this.root.right = right;
   }
@@ -43,53 +43,53 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   }
 
   @Override
-  public boolean add(T data) {
+  public boolean add(T elem) {
     // TODO can be optimized
-    if (contains(data)) return false;
+    if (contains(elem)) return false;
 
-    root = add(root, data);
+    root = add(root, elem);
     size++;
     return true;
   }
 
-  private Node add(Node node, T data) {
+  private Node add(Node node, T elem) {
     if (node == null) {
-      return new Node(data);
+      return new Node(elem);
     }
-    if (data.compareTo(node.data) < 0) {
-      node.left = add(node.left, data);
+    if (elem.compareTo(node.elem) < 0) {
+      node.left = add(node.left, elem);
     } else {
-      node.right = add(node.right, data);
+      node.right = add(node.right, elem);
     }
     return node;
   }
 
   @Override
-  public boolean remove(T data) {
-    if (contains(data)) {
-      root = remove(root, data);
+  public boolean remove(T elem) {
+    if (contains(elem)) {
+      root = remove(root, elem);
       size--;
       return true;
     }
     return false;
   }
 
-  private Node remove(Node node, T data) {
+  private Node remove(Node node, T elem) {
     if (node == null) return null;
 
-    int cmp = data.compareTo(node.data);
+    int cmp = elem.compareTo(node.elem);
     if (cmp < 0) {
-      node.left = remove(node.left, data);
+      node.left = remove(node.left, elem);
     } else if (cmp > 0) {
-      node.right = remove(node.right, data);
+      node.right = remove(node.right, elem);
     } else {
       if (node.left == null && node.right == null) return null;
       if (node.left == null) return node.right;
       if (node.right == null) return node.left;
 
       Node tmp = findMin(node.right);
-      node.data = tmp.data;
-      node.right = remove(node.right, tmp.data);
+      node.elem = tmp.elem;
+      node.right = remove(node.right, tmp.elem);
     }
     return node;
   }
@@ -105,17 +105,17 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   }
 
   @Override
-  public boolean contains(T data) {
-    return contains(root, data);
+  public boolean contains(T elem) {
+    return contains(root, elem);
   }
 
-  private boolean contains(Node node, T data) {
+  private boolean contains(Node node, T elem) {
     if (node == null) return false;
 
-    int cmp = data.compareTo(node.data);
+    int cmp = elem.compareTo(node.elem);
     if (cmp == 0) return true;
-    if (cmp < 0) return contains(node.left, data);
-    if (cmp > 0) return contains(node.right, data);
+    if (cmp < 0) return contains(node.left, elem);
+    if (cmp > 0) return contains(node.right, elem);
 
     return false;
   }
@@ -126,9 +126,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   }
 
   private int height(Node node) {
-    if (node == null) {
-      return 0;
-    }
+    if (node == null) return -1;
     return Math.max(height(node.left), height(node.right)) + 1;
   }
 
@@ -166,7 +164,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
         if (trav.right != null) stack.push(trav.right);
         if (trav.left != null) stack.push(trav.left);
 
-        return trav.data;
+        return trav.elem;
       }
 
       @Override
@@ -207,7 +205,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
           stack.push(node.right);
           trav = node.right;
         }
-        return node.data;
+        return node.elem;
       }
 
       @Override
@@ -245,7 +243,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
         if (expectSize != size) {
           throw new ConcurrentModificationException();
         }
-        return stack.pop().data;
+        return stack.pop().elem;
       }
 
       @Override
@@ -276,7 +274,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
         if (node.left != null) queue.offer(node.left);
         if (node.right != null) queue.offer(node.right);
 
-        return node.data;
+        return node.elem;
       }
 
       @Override

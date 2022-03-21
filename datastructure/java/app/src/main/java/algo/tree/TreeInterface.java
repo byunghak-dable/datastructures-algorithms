@@ -5,11 +5,11 @@ public interface TreeInterface<T> {
 
   int size();
 
-  boolean add(T data); // if exist return false
+  boolean add(T elem); // if exist return false
 
-  boolean remove(T data);
+  boolean remove(T elem);
 
-  boolean contains(T data);
+  boolean contains(T elem);
 
   int height();
 }

@@ -12,6 +12,7 @@ public class App {
     bst.add(1);
     bst.add(7);
     bst.add(2);
+    System.out.println(bst.height());
     Iterator<Integer> iter = bst.traverse(TreeTraversalOrder.LEVEL_ORDER);
     while (iter.hasNext()) {
       System.out.println(iter.next());

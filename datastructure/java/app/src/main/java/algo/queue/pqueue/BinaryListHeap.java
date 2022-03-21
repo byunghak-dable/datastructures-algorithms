@@ -20,22 +20,22 @@ public class BinaryListHeap<T extends Comparable<T>> {
    * heapify in O(n) time
    * http://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf
    */
-  public BinaryListHeap(T[] items) {
-    int heapSize = items.length;
+  public BinaryListHeap(T[] elems) {
+    int heapSize = elems.length;
     heap = new ArrayList<T>(heapSize);
 
-    for (T item : items) heap.add(item);
-
-    // TODO heapify(sink)
-    // heapify process, O(n)
+    for (T elem : elems) heap.add(elem);
+    // heapify O(n)
+    for (int i = Math.max(0, (heapSize / 2) - 1); i >= 0; i--) sink(i);
   }
 
-  public BinaryListHeap(Collection<T> items) {
-    int heapSize = items.size();
+  public BinaryListHeap(Collection<T> elems) {
+    int heapSize = elems.size();
     this.heap = new ArrayList<T>(heapSize);
-    this.heap.addAll(items);
-    // TODO heapify(sink)
-    // heapify process, O(n)
+    this.heap.addAll(elems);
+
+    // heapiufy O(n)
+    for (int i = Math.max(0, (heapSize / 2) - 1); i >= 0; i--) sink(i);
   }
 
   public boolean isEmpty() {

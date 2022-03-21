@@ -8,8 +8,8 @@ public class ListStack<E> implements StackInterface<E>, Iterable<E> {
   private LinkedList<E> list = new LinkedList<E>();
 
   @Override
-  public void push(E item) {
-    list.add(item);
+  public void push(E elem) {
+    list.add(elem);
   }
 
   @Override
