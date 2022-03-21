@@ -1,5 +1,7 @@
-package algo.tree;
+package algo.tree.bst;
 
+import algo.tree.TreeInterface;
+import algo.tree.TreeTraversalOrder;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.LinkedList;

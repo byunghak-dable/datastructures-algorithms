@@ -1,4 +1,6 @@
-package algo.linkedlist;
+package algo.linkedlist.doubly;
+
+import algo.linkedlist.LinkedListInterface;
 
 class Node<T> {
   Node<T> prev;

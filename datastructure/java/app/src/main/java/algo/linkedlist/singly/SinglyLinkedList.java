@@ -1,5 +1,6 @@
-package algo.linkedlist;
+package algo.linkedlist.singly;
 
+import algo.linkedlist.LinkedListInterface;
 import java.util.Iterator;
 
 class Node<T> {

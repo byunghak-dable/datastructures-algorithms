@@ -1,4 +1,6 @@
-package algo.tree;
+package algo.tree.redblacktree;
+
+import algo.tree.TreeInterface;
 
 /**
  * @category --- Definition ---
@@ -31,6 +33,26 @@ class Node<T> {
   Node(TreeColor color, T elem) {
     this.color = color;
     this.elem = elem;
+  }
+
+  boolean isNil() {
+    return elem == null;
+  }
+
+  boolean isBlack() {
+    return color == TreeColor.BLACK;
+  }
+
+  boolean isRed() {
+    return color == TreeColor.RED;
+  }
+
+  void setColor(TreeColor color) {
+    if (isNil()) {
+      this.color = TreeColor.BLACK;
+      return;
+    }
+    this.color = color;
   }
 }
 
