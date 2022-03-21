@@ -6,28 +6,29 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<T> {
-  class Node {
-    Node left;
-    Node right;
-    T elem;
+class Node<T> {
+  Node<T> left;
+  Node<T> right;
+  T elem;
 
-    Node(T elem) {
-      this.elem = elem;
-    }
+  Node(T elem) {
+    this.elem = elem;
   }
+}
 
-  private Node root = null;
+public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<T> {
+
+  private Node<T> root = null;
   private int size = 0;
 
   public BinarySearchTree() {}
 
   public BinarySearchTree(T elem) {
-    this.root = new Node(elem);
+    this.root = new Node<T>(elem);
   }
 
-  public BinarySearchTree(Node left, Node right, T elem) {
-    this.root = new Node(elem);
+  public BinarySearchTree(Node<T> left, Node<T> right, T elem) {
+    this.root = new Node<T>(elem);
     this.root.left = left;
     this.root.right = right;
   }
@@ -52,9 +53,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
     return true;
   }
 
-  private Node add(Node node, T elem) {
+  private Node<T> add(Node<T> node, T elem) {
     if (node == null) {
-      return new Node(elem);
+      return new Node<T>(elem);
     }
     if (elem.compareTo(node.elem) < 0) {
       node.left = add(node.left, elem);
@@ -74,7 +75,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
     return false;
   }
 
-  private Node remove(Node node, T elem) {
+  private Node<T> remove(Node<T> node, T elem) {
     if (node == null) return null;
 
     int cmp = elem.compareTo(node.elem);
@@ -87,19 +88,19 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
       if (node.left == null) return node.right;
       if (node.right == null) return node.left;
 
-      Node tmp = findMin(node.right);
+      Node<T> tmp = findMin(node.right);
       node.elem = tmp.elem;
       node.right = remove(node.right, tmp.elem);
     }
     return node;
   }
 
-  private Node findMin(Node node) {
+  private Node<T> findMin(Node<T> node) {
     while (node.left != null) node = node.left;
     return node;
   }
 
-  private Node findMax(Node node) {
+  private Node<T> findMax(Node<T> node) {
     while (node.right != null) node = node.right;
     return node;
   }
@@ -109,7 +110,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
     return contains(root, elem);
   }
 
-  private boolean contains(Node node, T elem) {
+  private boolean contains(Node<T> node, T elem) {
     if (node == null) return false;
 
     int cmp = elem.compareTo(node.elem);
@@ -125,7 +126,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
     return height(root);
   }
 
-  private int height(Node node) {
+  private int height(Node<T> node) {
     if (node == null) return -1;
     return Math.max(height(node.left), height(node.right)) + 1;
   }
@@ -147,7 +148,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
 
   public Iterator<T> preOrderTraversal() {
     final int expectSize = size;
-    final Stack<Node> stack = new Stack<Node>();
+    final Stack<Node<T>> stack = new Stack<Node<T>>();
     stack.push(root);
 
     return new Iterator<T>() {
@@ -160,7 +161,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
 
       @Override
       public T next() {
-        Node trav = stack.pop();
+        Node<T> trav = stack.pop();
         if (trav.right != null) stack.push(trav.right);
         if (trav.left != null) stack.push(trav.left);
 
@@ -177,11 +178,11 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   // TODO: try again
   public Iterator<T> inOrderTraversal() {
     int expectSize = size;
-    Stack<Node> stack = new Stack<Node>();
+    Stack<Node<T>> stack = new Stack<Node<T>>();
     stack.push(root);
 
     return new Iterator<T>() {
-      private Node trav = root;
+      private Node<T> trav = root;
 
       @Override
       public boolean hasNext() {
@@ -200,7 +201,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
           stack.push(trav.left);
           trav = trav.left;
         }
-        Node node = stack.pop();
+        Node<T> node = stack.pop();
         if (node.right != null) {
           stack.push(node.right);
           trav = node.right;
@@ -218,11 +219,11 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
   // TODO: try again
   public Iterator<T> postOrderTraversal() {
     int expectSize = size;
-    Stack<Node> stack = new Stack<Node>();
-    Stack<Node> tmpStack = new Stack<Node>();
+    Stack<Node<T>> stack = new Stack<Node<T>>();
+    Stack<Node<T>> tmpStack = new Stack<Node<T>>();
     tmpStack.push(root);
     while (!tmpStack.isEmpty()) {
-      Node node = tmpStack.pop();
+      Node<T> node = tmpStack.pop();
       if (node == null) continue;
 
       stack.push(node);
@@ -255,7 +256,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
 
   public Iterator<T> levelOrderTraversal() {
     int expectSize = size;
-    Queue<Node> queue = new LinkedList<Node>();
+    Queue<Node<T>> queue = new LinkedList<Node<T>>();
     queue.offer(root);
 
     return new Iterator<T>() {
@@ -270,7 +271,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<
       public T next() {
         if (expectSize != size) throw new ConcurrentModificationException();
 
-        Node node = queue.poll();
+        Node<T> node = queue.poll();
         if (node.left != null) queue.offer(node.left);
         if (node.right != null) queue.offer(node.right);
 

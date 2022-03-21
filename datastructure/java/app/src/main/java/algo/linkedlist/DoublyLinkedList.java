@@ -1,11 +1,12 @@
 package algo.linkedlist;
 
+class Node<T> {
+  Node<T> prev;
+  Node<T> next;
+  T data;
+}
+
 public class DoublyLinkedList<T> implements LinkedListInterface<T> {
-  class Node {
-    Node prev;
-    Node next;
-    T data;
-  }
 
   @Override
   public int size() {

@@ -2,20 +2,21 @@ package algo.linkedlist;
 
 import java.util.Iterator;
 
-public class SinglyLinkedList<T> implements LinkedListInterface<T>, Iterable<T> {
-  class Node<K> {
-    Node<K> next;
-    K data;
+class Node<T> {
+  Node<T> next;
+  T data;
 
-    Node(K data) {
-      this.data = data;
-    }
-
-    Node(Node<K> next, K data) {
-      this.next = next;
-      this.data = data;
-    }
+  Node(T data) {
+    this.data = data;
   }
+
+  Node(Node<T> next, T data) {
+    this.next = next;
+    this.data = data;
+  }
+}
+
+public class SinglyLinkedList<T> implements LinkedListInterface<T>, Iterable<T> {
 
   private int size = 0;
   private Node<T> head, tail = null;
