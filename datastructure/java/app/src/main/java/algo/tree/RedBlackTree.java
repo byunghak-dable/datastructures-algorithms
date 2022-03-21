@@ -18,27 +18,30 @@ package algo.tree;
  * @cond 2. Double Red and uncle "s" is red
  * @solution : p[target] to black, p[p[target]] to red and so on~
  */
-public class RedBlackTree<T extends Comparable<T>> implements TreeInterface<T> {
-  private static final boolean RED = true;
-  private static final boolean BLACK = false;
+enum TreeColor {
+  RED,
+  BLACK,
+}
 
-  class Node {
-    boolean color;
-    Node parent, left, right;
-    T elem;
+class Node<T> {
+  TreeColor color;
+  Node<T> parent, left, right;
+  T elem;
 
-    Node(boolean color, T elem) {
-      this.color = color;
-      this.elem = elem;
-    }
+  Node(TreeColor color, T elem) {
+    this.color = color;
+    this.elem = elem;
   }
+}
+
+public class RedBlackTree<T extends Comparable<T>> implements TreeInterface<T> {
 
   private int size = 0;
-  private Node root = null;
-  private Node NIL;
+  private Node<T> root = null;
+  private Node<T> NIL;
 
   public RedBlackTree() {
-    NIL = new Node(BLACK, null);
+    NIL = new Node<T>(TreeColor.BLACK, null);
     NIL.parent = NIL;
     NIL.left = NIL;
     NIL.right = NIL;
@@ -54,7 +57,7 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface<T> {
     return size == 0;
   }
 
-  public Node rebalance(Node node) {
+  public Node<T> rebalanceInsert(Node<T> node) {
     // case 1. Double Red and uncle "s" is black
     // case 2. Double Red and undle "s" is red
     return null;
@@ -62,17 +65,25 @@ public class RedBlackTree<T extends Comparable<T>> implements TreeInterface<T> {
 
   @Override
   public boolean add(T elem) {
-    Node node = new Node(true, elem);
+    Node<T> node = new Node<T>(TreeColor.RED, elem);
     // add
-    // rebalanceInsert
-    rebalance(node);
+    // rebalance
+    rebalanceInsert(node);
     return false;
   }
 
   @Override
   public boolean remove(T elem) {
-    // TODO Auto-generated method stub
+    Node<T> node = search(elem, root);
+    // rebalance
+    reblanceDelete(node);
     return false;
+  }
+
+  private void reblanceDelete(Node<T> node) {}
+
+  private Node<T> search(T elem, Node<T> currentNode) {
+    return null;
   }
 
   @Override
