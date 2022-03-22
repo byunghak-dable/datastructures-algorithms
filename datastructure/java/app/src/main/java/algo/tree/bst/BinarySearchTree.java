@@ -1,6 +1,6 @@
 package algo.tree.bst;
 
-import algo.tree.TreeInterface;
+import algo.tree.Tree;
 import algo.tree.TreeTraversalOrder;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -18,7 +18,7 @@ class Node<T> {
   }
 }
 
-public class BinarySearchTree<T extends Comparable<T>> implements TreeInterface<T> {
+public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
   private Node<T> root = null;
   private int size = 0;

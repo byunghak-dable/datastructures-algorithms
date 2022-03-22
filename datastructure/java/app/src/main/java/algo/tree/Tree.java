@@ -1,6 +1,6 @@
 package algo.tree;
 
-public interface TreeInterface<T> {
+public interface Tree<T> {
   boolean isEmpty();
 
   int size();

@@ -1,6 +1,6 @@
 package algo.tree.avltree;
 
-import algo.tree.TreeInterface;
+import algo.tree.Tree;
 import algo.tree.TreePrinter;
 
 final class Node<T> implements TreePrinter {
@@ -31,7 +31,7 @@ final class Node<T> implements TreePrinter {
 
 // Balanced Tree
 // - Balance Factor: B(x) = H(L) - H(R)
-public class AVLTree<T extends Comparable<T>> implements TreeInterface<T> {
+public class AVLTree<T extends Comparable<T>> implements Tree<T> {
   private Node<T> root;
   private int size = 0;
 
