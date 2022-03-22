@@ -185,17 +185,24 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
       throw new IllegalArgumentException();
     }
     Node<T> node = search(root, elem);
+    Node<T> successor;
     if (node.isNil()) return false;
-    if (node.left.isNil()) {
-      swapElem(node, node.right);
+    if (node.left.isNil() && node.right.isNil()) {
+      node = NIL;
+      successor = node;
+    } else if (node.left.isNil()) {
+      successor = findMin(node.right);
+      swapElem(node, successor);
     } else if (node.right.isNil()) {
-      swapElem(node, node.left);
+      successor = findMax(node.left);
+      swapElem(node, successor);
     } else {
-      Node<T> successor = findMax(node.left);
+      successor = findMax(node.left);
       swapElem(node, successor);
     }
-    balanceRemove(node);
-    prune(node, elem);
+    balanceRemove(successor);
+    if (successor.parent.left == successor) successor.parent.left = NIL;
+    if (successor.parent.right == successor) successor.parent.right = NIL;
     return true;
   }
 
@@ -304,6 +311,11 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
     }
     // node => black
     node.color = TreeColor.BLACK;
+  }
+
+  private Node<T> findMin(Node<T> node) {
+    while (!node.left.isNil()) node = node.left;
+    return node;
   }
 
   private Node<T> findMax(Node<T> node) {
