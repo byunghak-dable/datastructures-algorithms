@@ -186,17 +186,23 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
     }
     Node<T> node = search(root, elem);
     if (node.isNil()) return false;
+    Node<T> target;
     if (node.left.isNil() && node.right.isNil()) {
       node.elem = null;
+      target = node;
     } else if (node.left.isNil()) {
       swapElem(node, node.right);
+      target = node.right;
     } else if (node.right.isNil()) {
       swapElem(node, node.left);
+      target = node.left;
     } else {
       Node<T> successor = findMax(node.left);
       swapElem(node, successor);
+      target = successor;
     }
-    balanceRemove(node);
+    balanceRemove(target);
+    System.out.println("prune: " + node.elem);
     prune(node, elem);
     return true;
   }
@@ -210,6 +216,7 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
   }
 
   private void prune(Node<T> node, T elem) {
+    System.out.println("pruning" + node.elem + " " + elem);
     if (node.isNil()) return;
     int cmp = elem.compareTo(node.elem);
     if (cmp < 0) {
@@ -222,16 +229,21 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
     }
     if (!node.left.isNil()) node.left.parent = node.parent;
     if (!node.right.isNil()) node.right.parent = node.parent;
-    node = null;
   }
 
   // Terminology
   // - nephew : sibling's child same direction as node
   // - niece : sibling's child opposite direction as node
   private void balanceRemove(Node<T> node) {
+    System.out.println(node.elem);
     // case 2. black is deleted
     while (true) {
-      if (node == root || node.color == TreeColor.RED) break;
+      if (node == root || node.color == TreeColor.RED) {
+        System.out.println(node == root);
+        System.out.println(node.color);
+        System.out.println("break");
+        break;
+      }
       Node<T> parent = node.parent;
       Node<T> sibling = parent.left == node ? parent.right : parent.left;
       boolean isLeft = parent.left == node;
@@ -248,13 +260,14 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
       //  1) color: parent=>red, sibling=>black
       //  2) rotate: sibling to parent
       if (sibling.color == TreeColor.RED) {
+        System.out.println("case 1");
         parent.color = TreeColor.RED;
         sibling.color = TreeColor.BLACK;
         if (isLeft) {
-          rightRotation(parent);
+          leftRotation(parent);
           continue;
         }
-        leftRotation(parent);
+        rightRotation(parent);
         continue;
       }
       // case 2. black: sibling | red: nephew
@@ -263,6 +276,7 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
       //  2) rotate: sibling to parent
       //  3) node = root & break
       if (sibling.color == TreeColor.BLACK && nephew.color == TreeColor.RED) {
+        System.out.println("case 2");
         sibling.color = parent.color;
         parent.color = nephew.color = TreeColor.BLACK;
         if (isLeft) {
@@ -278,6 +292,7 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
       //  1) color: niece=>black, sibling=>red
       //  2) rotate: niece to sibling
       if (niece.color == TreeColor.RED) {
+        System.out.println("case 3");
         niece.color = TreeColor.BLACK;
         sibling.color = TreeColor.RED;
         if (isLeft) {
@@ -287,14 +302,15 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
         leftRotation(sibling);
         continue;
       }
+      System.out.println("case 4");
       // case(else) 4. black: sibling, niece, nephew
       // sol) go to case 1, 2, 3, 4
       //  1) color: sibling red
       //  2) node = parent
       sibling.color = TreeColor.RED;
       node = parent;
-      // node => black
     }
+    // node => black
     node.color = TreeColor.BLACK;
   }
 

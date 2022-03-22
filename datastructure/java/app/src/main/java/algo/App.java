@@ -18,8 +18,9 @@ public class App {
     tree.add(6);
     tree.add(7);
     tree.add(8);
-    print(tree.traverse());
     tree.remove(3);
+    print(tree.traverse());
+    tree.remove(2);
     print(tree.traverse());
   }
 
