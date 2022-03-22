@@ -186,23 +186,15 @@ public class RedBlackTree<T extends Comparable<T>> implements Tree<T> {
     }
     Node<T> node = search(root, elem);
     if (node.isNil()) return false;
-    Node<T> target;
-    if (node.left.isNil() && node.right.isNil()) {
-      node.elem = null;
-      target = node;
-    } else if (node.left.isNil()) {
+    if (node.left.isNil()) {
       swapElem(node, node.right);
-      target = node.right;
     } else if (node.right.isNil()) {
       swapElem(node, node.left);
-      target = node.left;
     } else {
       Node<T> successor = findMax(node.left);
       swapElem(node, successor);
-      target = successor;
     }
-    balanceRemove(target);
-    System.out.println("prune: " + node.elem);
+    balanceRemove(node);
     prune(node, elem);
     return true;
   }
