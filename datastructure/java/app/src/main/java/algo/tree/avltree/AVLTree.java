@@ -2,8 +2,11 @@ package algo.tree.avltree;
 
 import algo.tree.Tree;
 import algo.tree.TreePrinter;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
-final class Node<T> implements TreePrinter {
+class Node<T> implements TreePrinter {
   int bf; // balance factor : H(L) - H(R)
   int height; // node height
   Node<T> left, right;
@@ -26,6 +29,12 @@ final class Node<T> implements TreePrinter {
   @Override
   public String getElem() {
     return elem.toString();
+  }
+
+  public void print() {
+    T leftElem = left == null ? null : left.elem;
+    T rightElem = right == null ? null : right.elem;
+    System.out.println(leftElem + " " + elem + " " + rightElem);
   }
 }
 
@@ -68,7 +77,7 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
 
   @Override
   public boolean add(T elem) {
-    if (!contains(root, elem)) return false;
+    if (contains(root, elem)) return false;
     root = add(root, elem);
     size++;
     return true;
@@ -90,17 +99,16 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
     } else if (cmp > 0) {
       node.right = remove(node.right, elem);
     } else {
-      if (node.left != null && node.right != null) return null;
-      if (node.left != null) return node.right;
-      if (node.right != null) return node.left;
+      if (node.left == null) return node.right;
+      if (node.right == null) return node.left;
       if (node.left.height > node.right.height) {
         Node<T> successor = findMax(node.left);
         node.elem = successor.elem;
-        node.left = remove(node.left, successor.elem);
+        node.left = remove(node.left, node.elem);
       } else {
         Node<T> successor = findMin(node.right);
         node.elem = successor.elem;
-        node.right = remove(node.right, successor.elem);
+        node.right = remove(node.right, node.elem);
       }
     }
     update(node);
@@ -157,12 +165,12 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
   }
 
   private Node<T> rightLeftCase(Node<T> node) {
-    return rightRotation(node);
+    node.right = leftRotation(node.right);
+    return rightRightCase(node);
   }
 
   private Node<T> rightRightCase(Node<T> node) {
-    node.right = leftRotation(node.right);
-    return rightRightCase(node);
+    return leftRotation(node);
   }
 
   private Node<T> leftRotation(Node<T> node) {
@@ -181,5 +189,26 @@ public class AVLTree<T extends Comparable<T>> implements Tree<T> {
     update(node);
     update(newParent);
     return newParent;
+  }
+
+  public Iterator<T> traverse() {
+    Queue<Node<T>> queue = new LinkedList<Node<T>>();
+    queue.add(root);
+    return new Iterator<T>() {
+
+      @Override
+      public boolean hasNext() {
+        return !queue.isEmpty();
+      }
+
+      @Override
+      public T next() {
+        Node<T> node = queue.poll();
+        if (node.left != null) queue.offer(node.left);
+        if (node.right != null) queue.offer(node.right);
+        node.print();
+        return node.elem;
+      }
+    };
   }
 }
