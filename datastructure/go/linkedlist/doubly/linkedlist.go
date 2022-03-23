@@ -8,6 +8,7 @@ type node struct {
 
 type LinkedList struct {
 	head *node
+
 	tail *node
 	size int
 }

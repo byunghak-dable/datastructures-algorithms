@@ -2,13 +2,4 @@ package main
 
 func main() {
 
-
-
-
-
-
-
-
-
-
 }
