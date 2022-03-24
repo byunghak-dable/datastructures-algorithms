@@ -7,7 +7,8 @@ public class Main {
 
   public static void main(String[] args) {
     // Integer[] arrows = {6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0, 2};
-    Integer[] arrows = {6, 1, 4, 1, 6};
+    // Integer[] arrows = {1, 1, 4, 4, 6, 6, 1, 7, 3};
+    Integer[] arrows = {2, 7, 2, 5, 0};
     int result = solution(arrows);
     System.out.println(result);
   }
@@ -90,6 +91,7 @@ class Graph {
   }
 }
 
+// base on depth first search
 class FigureSearch {
   private List<Vertex> list;
   private boolean[] visitedList;
@@ -134,9 +136,7 @@ class Vertex {
 
   boolean addNeighbor(Vertex neighbor) {
     for (Vertex existNeighbor : neighbors) {
-      if (isDuplicate(existNeighbor, neighbor)) {
-        return false;
-      }
+      if (isDuplicate(existNeighbor, neighbor)) return false;
     }
     if (neighbors.size() > 8) throw new RuntimeException("too many neighbors");
     neighbors.add(neighbor);
