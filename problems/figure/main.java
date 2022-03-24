@@ -6,13 +6,14 @@ import java.util.Map;
 public class Main {
 
   public static void main(String[] args) {
-    Integer[] arrows = {1, 3, 5, 6, 7};
+    Integer[] arrows = {6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0};
     solution(arrows);
   }
 
   public static int solution(Integer[] arrows) {
     Graph graph = new Graph();
     graph.makeGraph(arrows);
+    System.out.println(graph.getStart().getNeighbors());
     return 0;
   }
 }
@@ -21,8 +22,8 @@ class Graph {
   Map<String, Vertex> map = new HashMap<String, Vertex>();
 
   void makeGraph(Integer[] arrows) {
+    if (!map.isEmpty()) throw new RuntimeException("need to clear graph");
     Vertex lastVertex = new Vertex(0, 0);
-    Map<String, Vertex> map = new HashMap<String, Vertex>();
     map.put(generateKey(0, 0), lastVertex);
 
     for (int i = 0; i < arrows.length; i++) {
@@ -73,16 +74,22 @@ class Graph {
         currVertex = new Vertex(posX, posY);
         map.put(generateKey(posX, posY), currVertex);
       }
-      System.out.println(currVertex.getPosX() + " " + currVertex.getPosY());
-      System.out.println(map);
       currVertex.addNeighbor(lastVertex);
       lastVertex.addNeighbor(currVertex);
       lastVertex = currVertex;
     }
   }
 
+  int bfs(Vertex start) {
+    return 0;
+  }
+
   String generateKey(int posX, int posY) {
     return posX + ":" + posY;
+  }
+
+  Vertex getStart() {
+    return map.get("0:0");
   }
 }
 
