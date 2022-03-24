@@ -6,25 +6,28 @@ import java.util.Map;
 public class Main {
 
   public static void main(String[] args) {
-    Integer[] arrows = {6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0};
-    solution(arrows);
+    // Integer[] arrows = {6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0, 2};
+    Integer[] arrows = {6, 1, 4, 1, 6};
+    int result = solution(arrows);
+    System.out.println(result);
   }
 
   public static int solution(Integer[] arrows) {
     Graph graph = new Graph();
-    graph.makeGraph(arrows);
-    System.out.println(graph.getStart().getNeighbors());
-    return 0;
+    List<Vertex> nodes = graph.makeGraph(arrows);
+    FigureSearch search = new FigureSearch(nodes);
+
+    return search.getFigureCount();
   }
 }
 
 class Graph {
-  Map<String, Vertex> map = new HashMap<String, Vertex>();
-
-  void makeGraph(Integer[] arrows) {
-    if (!map.isEmpty()) throw new RuntimeException("need to clear graph");
-    Vertex lastVertex = new Vertex(0, 0);
+  List<Vertex> makeGraph(Integer[] arrows) {
+    List<Vertex> list = new ArrayList<Vertex>();
+    Map<String, Vertex> map = new HashMap<String, Vertex>();
+    Vertex lastVertex = new Vertex(list.size(), 0, 0);
     map.put(generateKey(0, 0), lastVertex);
+    list.add(lastVertex);
 
     for (int i = 0; i < arrows.length; i++) {
       int lastPosX = lastVertex.getPosX();
@@ -71,33 +74,60 @@ class Graph {
       if (map.containsKey(mapKey)) {
         currVertex = map.get(mapKey);
       } else {
-        currVertex = new Vertex(posX, posY);
+        currVertex = new Vertex(list.size(), posX, posY);
         map.put(generateKey(posX, posY), currVertex);
+        list.add(currVertex);
       }
       currVertex.addNeighbor(lastVertex);
       lastVertex.addNeighbor(currVertex);
       lastVertex = currVertex;
     }
-  }
-
-  int bfs(Vertex start) {
-    return 0;
+    return list;
   }
 
   String generateKey(int posX, int posY) {
     return posX + ":" + posY;
   }
+}
 
-  Vertex getStart() {
-    return map.get("0:0");
+class FigureSearch {
+  private List<Vertex> list;
+  private boolean[] visitedList;
+  private int count = 0;
+
+  FigureSearch(List<Vertex> list) {
+    this.list = list;
+  }
+
+  int getFigureCount() {
+    count = 0;
+    visitedList = new boolean[list.size()];
+    dfs(0, null);
+    return count / 2;
+  }
+
+  void dfs(int index, Vertex lastVertex) {
+    Vertex target = list.get(index);
+    if (visitedList[index]) {
+      count++;
+      return;
+    }
+    visitedList[index] = true;
+    List<Vertex> neighbors = target.getNeighbors();
+    for (Vertex neighbor : neighbors) {
+      if (neighbor == lastVertex) continue;
+      dfs(neighbor.getIndex(), target);
+    }
   }
 }
 
 class Vertex {
-  private List<Vertex> neighbors = new ArrayList<Vertex>(8);
+  private int index;
   private int posX, posY;
+  private List<Vertex> neighbors = new ArrayList<Vertex>(8);
 
-  Vertex(int posX, int posY) {
+  Vertex(int index, int posX, int posY) {
+    this.index = index;
     this.posX = posX;
     this.posY = posY;
   }
@@ -123,6 +153,10 @@ class Vertex {
 
   int getPosY() {
     return posY;
+  }
+
+  int getIndex() {
+    return index;
   }
 
   List<Vertex> getNeighbors() {
