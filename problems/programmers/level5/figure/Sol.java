@@ -146,7 +146,6 @@ class Solution {
         vis2[opposite(i)] = true;
         map.put(next, vis2);
       } else {
-
         if (!visited[opposite(i)]) {
           visited[opposite(i)] = true;
           answer++;
