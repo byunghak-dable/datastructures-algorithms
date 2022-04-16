@@ -1,13 +1,13 @@
 package algo;
 
-import algo.algorithm.Sorting;
 import java.util.*;
 
 public class App {
+  // ["12","123","1235","567","88"]
   public static void main(String[] args) {
-    Sorting s = new Sorting();
-    int[] array = {234, -19, 323234234, 4, 37, -6};
-    array = s.radixSort(array);
-    for (int v : array) System.out.println(v);
+    App app = new App();
+    int count = 0;
+    System.out.println(count++);
+    System.out.println(count);
   }
 }
