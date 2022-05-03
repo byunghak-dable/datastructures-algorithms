@@ -1,13 +1,19 @@
 package algo;
 
+import algo.tree.TreeTraversalOrder;
+import algo.tree.bst.BinarySearchTree;
 import java.util.*;
 
 public class App {
   // ["12","123","1235","567","88"]
   public static void main(String[] args) {
-    App app = new App();
-    int count = 0;
-    System.out.println(count++);
-    System.out.println(count);
+    BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+    bst.add(3);
+    bst.add(5);
+    bst.add(2);
+    Iterator<Integer> iter = bst.traverse(TreeTraversalOrder.IN_ORDER);
+    while (iter.hasNext()) {
+      System.out.println(iter.next());
+    }
   }
 }
