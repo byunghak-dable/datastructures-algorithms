@@ -1,12 +1,3 @@
-t = "11100"
-t += "1"
-tmp = 0
-m = 0
-for i, v in enumerate(t):
-    if v == "0":
-        tmp += 1
-    else:
-        m = max(m, tmp)
-        tmp = 0
+import re
 
-print(m)
+print(re.findall("fro[a-z]{2,2}/", "frodo/front/frost/frozen/frame/kakao"))

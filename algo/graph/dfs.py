@@ -5,7 +5,7 @@ def arr_dfs(arr, vis, i, j):
 
     for ni, nj in [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]:
         if 0 <= ni < len(arr) and 0 <= nj < len(arr[i]):
-            arr_dfs(arr, vis, i, j)
+            arr_dfs(arr, vis, ni, nj)
 
 
 def permu(curr, left):
