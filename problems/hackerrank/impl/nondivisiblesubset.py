@@ -1,7 +1,8 @@
 from collections import Counter
 
-# 두개의 요소의 합이 k가 아닌 부분집합 구하기
 """
+두개의 요소의 합이 k가 아닌 부분집합 구하기
+
 1. left == 0 => 1개 추가 가능
 2. left == k / 2 => 1개 추가 가능
 3. 위 조건 x and left < k => max(left의 개수, k - left의 개수)
