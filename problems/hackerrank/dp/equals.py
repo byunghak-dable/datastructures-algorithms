@@ -1,6 +1,8 @@
 """
 한 명을 뺸 나머지에게 1, 2, 5개 중 한 가지 방법으로 초콜릿을 줄 수 있을 떄
 모두 같은 초콜릿을 가질 수 있는 최소 가지 수 구하기
+
+https://www.hackerrank.com/challenges/equal/problem?isFullScreen=true
 """
 
 
