@@ -2,10 +2,9 @@ package algo;
 
 import algo.tree.TreeTraversalOrder;
 import algo.tree.bst.BinarySearchTree;
-import java.util.*;
+import java.util.Iterator;
 
 public class App {
-  // ["12","123","1235","567","88"]
   public static void main(String[] args) {
     BinarySearchTree<Integer> bst = new BinarySearchTree<>();
     bst.add(3);
