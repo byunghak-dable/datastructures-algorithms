@@ -22,18 +22,16 @@ def caseCoinChange1(coins: list[int], amount: int) -> int:
 # 모든 코인의 경우의 수 - 공간 복잡도 O(n)
 def caseCoinChange2(coins: list[int], amount: int) -> int:
     dp = [1] + [0] * amount
-    for i in range(len(coins) - 1, -1, -1):
-        nDp = [1] + [0] * amount
+    nDp = dp[:]
+    for c in coins:
         for j in range(1, amount + 1):
             nDp[j] = dp[j]
-            if j >= coins[i]:
-                nDp[j] += nDp[j - coins[i]]
-        dp = nDp
-    return dp[-1]
+            if j >= c:
+                nDp[j] += nDp[j - c]
+        dp, nDp = nDp, dp
+    return dp[amount]
 
 
 coins = [1, 2, 5]
 amount = 11
-# print(countCoinChange(coins, amount))
-print(caseCoinChange1(coins, 5))
 print(caseCoinChange2(coins, 5))
