@@ -4,7 +4,6 @@ class Solution {
   public static void main(String[] args) {
     Solution sol = new Solution();
     int[][] match = {{4, 3}, {4, 2}, {3, 2}, {1, 2}, {2, 5}};
-    // int[][] match = {{1, 2}, {2, 3}, {3, 4}};
     int result = sol.solution(5, match);
     System.out.println(result);
   }
