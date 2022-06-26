@@ -47,7 +47,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
   @Override
   public boolean add(T elem) {
-    // TODO can be optimized
     if (contains(elem)) return false;
 
     root = add(root, elem);
@@ -99,11 +98,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
   private Node<T> findMin(Node<T> node) {
     while (node.left != null) node = node.left;
-    return node;
-  }
-
-  private Node<T> findMax(Node<T> node) {
-    while (node.right != null) node = node.right;
     return node;
   }
 
@@ -177,7 +171,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     };
   }
 
-  // TODO: try again
   public Iterator<T> inOrderTraversal() {
     int expectSize = size;
     Stack<Node<T>> stack = new Stack<Node<T>>();
