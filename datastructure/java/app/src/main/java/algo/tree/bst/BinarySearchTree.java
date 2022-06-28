@@ -236,9 +236,8 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
       @Override
       public T next() {
-        if (expectSize != size) {
-          throw new ConcurrentModificationException();
-        }
+        if (expectSize != size) throw new ConcurrentModificationException();
+
         return stack.pop().elem;
       }
 
