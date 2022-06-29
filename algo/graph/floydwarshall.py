@@ -26,19 +26,6 @@ def floyd_warchall(n: int, link: list):
     return graph
 
 
-def search(n, edges):
-    graph = [[0 if i == j else math.inf for j in range(n)] for i in range(n)]
-    for fr, to, cost in edges:
-        graph[fr][to] = cost
-
-    for m in range(n):
-        for i in range(n):
-            for j in range(n):
-                graph[i][j] = min(graph[i][j], graph[i][m] + graph[m][j])
-
-    return graph
-
-
 t1 = [[0, 1, 4], [0, 2, 1], [2, 1, 2], [1, 3, 1], [2, 3, 5], [3, 4, 3]]
 
 print(floyd_warchall(5, t1))
