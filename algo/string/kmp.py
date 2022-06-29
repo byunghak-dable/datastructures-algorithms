@@ -6,30 +6,39 @@ KMP(Knuth-Morris-Pratt) 알고리즘
 
 
 def kmp(needle, haystack):
-    p_arr = kmp_pattern(needle)
-    idx = 0
-    for v in haystack:
-        while idx > 0 and haystack[idx] != v:
-            idx = p_arr[idx - 1]
+    lps = make_lps(needle)
+    i, j = 0, 0  # i : haystack, j : needle
+    while i < len(haystack):
+        if j == len(needle):
+            # found a match do something
+            print("match")
+            j = 0
+        if haystack[i] == needle[j]:
+            i, j = i + 1, j + 1
+            continue
+        if j == 0:
+            i += 1
+            continue
+        j = lps[j - 1]
 
-        if haystack[idx] == v:
-            if idx == len(haystack) - 1:
-                print("matched")
-                idx = p_arr[idx]
-            else:
-                idx += 1
 
-
-def kmp_pattern(p):
-    lps = [0] * len(p)  # longest prefix sufix
-    prev_lps = 0
-    for i in range(1, len(p)):
-        while prev_lps > 0 and p[i] != p[prev_lps]:
-            prev_lps = lps[prev_lps - 1]
-        if p[i] == p[prev_lps]:
-            prev_lps += 1
-            lps[i] = prev_lps
+# finding matching prefix, suffix
+# @caution prefix cannot be entire string
+def make_lps(needle):
+    lps = [0] * len(needle)
+    prev, curr = 0, 1
+    while curr < len(needle):
+        if needle[curr] == needle[prev]:
+            prev += 1
+            lps[curr] = prev
+            curr += 1
+            continue
+        if prev == 0:
+            curr += 1
+            continue
+        prev = lps[prev - 1]
     return lps
 
 
-kmp("sd", "sdfsdf")
+# kmp("sd", "sdfsdf")
+print(kmp("sd", "sdfgsdfgs"))
