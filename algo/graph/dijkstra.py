@@ -30,7 +30,6 @@ def dijkstra(n: int, graph: dict, start: int, end: int = -1) -> tuple[list, list
     heappush(pq, (0, start))  # (cost, vertex)
     while pq:
         cost, idx = heappop(pq)
-        print(cost, idx)
         if idx == end:
             return dist, prev
         vis[idx] = True
@@ -40,11 +39,11 @@ def dijkstra(n: int, graph: dict, start: int, end: int = -1) -> tuple[list, list
         for nb_idx, nb_cost in graph[idx]:
             if vis[nb_idx]:
                 continue
-            n_cost = cost + nb_cost
-            if n_cost < dist[nb_idx]:
-                dist[nb_idx] = n_cost
+            nb_cost += cost
+            if nb_cost < dist[nb_idx]:
+                dist[nb_idx] = nb_cost
                 prev[nb_idx] = idx
-                heappush(pq, (n_cost, nb_idx))
+                heappush(pq, (nb_cost, nb_idx))
     return dist, prev
 
 
@@ -74,5 +73,6 @@ t2 = [
 ]
 g1 = link(t1)
 g2 = link(t2, True)
+print(g2)
 dist, prev = dijkstra(7, g2, 4)
 print(dist, prev)
