@@ -8,7 +8,6 @@
 """
 
 import math
-from collections import defaultdict
 
 
 def floyd_warchall(n: int, link: list):
@@ -17,6 +16,7 @@ def floyd_warchall(n: int, link: list):
 
     for n1, n2, cost in link:
         graph[n1][n2] = cost
+        graph[n2][n1] = cost
 
     for m in range(n):
         for i in range(n):
