@@ -22,7 +22,7 @@ def link(arr: list, doubly: bool = False) -> dict:
 # Lazy Dijkstra
 # @param n : 0~n-1(vertex)
 # @param graph : linked info
-def lazy_di(n: int, graph: dict, start: int, end: int = -1) -> tuple[list, list]:
+def dijkstra(n: int, graph: dict, start: int, end: int = -1) -> tuple[list, list]:
     vis = [False for _ in range(n)]
     prev = [None for _ in range(n)]
     dist = [0 if i == start else math.inf for i in range(n)]
@@ -74,5 +74,5 @@ t2 = [
 ]
 g1 = link(t1)
 g2 = link(t2, True)
-dist, prev = lazy_di(7, g2, 4)
+dist, prev = dijkstra(7, g2, 4)
 print(dist, prev)
