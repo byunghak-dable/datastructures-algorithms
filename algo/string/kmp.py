@@ -5,21 +5,22 @@ KMP(Knuth-Morris-Pratt) 알고리즘
 """
 
 
-def kmp(needle, haystack):
+def kmp(haystack, needle):
     lps = make_lps(needle)
     i, j = 0, 0  # i : haystack, j : needle
     while i < len(haystack):
-        if j == len(needle):
-            # found a match do something
-            print("match")
-            j = 0
         if haystack[i] == needle[j]:
             i, j = i + 1, j + 1
-            continue
-        if j == 0:
-            i += 1
-            continue
-        j = lps[j - 1]
+        else:
+            if j == 0:
+                i += 1
+            else:
+                j = lps[j - 1]
+
+        # found a match do something
+        if j == len(needle):
+            print("match")
+            j = 0
 
 
 # finding matching prefix, suffix
@@ -41,4 +42,4 @@ def make_lps(needle):
 
 
 # kmp("sd", "sdfsdf")
-print(kmp("sd", "sdfgsdfgs"))
+print(kmp("sdfsdf", "sd"))
