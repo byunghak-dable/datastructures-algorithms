@@ -1,9 +1,7 @@
-def sort(orignal_arr: list[int]) -> list[int]:
-    arr = orignal_arr[:]
+def sort(input_arr: list[int]) -> list[int]:
+    arr = input_arr[:]
 
     for i in range(len(arr) - 1):
-        if arr[i] <= arr[i + 1]:
-            continue
         for j in range(i, -1, -1):
             if arr[j] <= arr[j + 1]:
                 break
