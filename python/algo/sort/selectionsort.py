@@ -1,11 +1,14 @@
-def sort(original_arr: list[int]) -> list[int]:
-    arr = original_arr[:]
+def sort(input_arr: list[int]) -> list[int]:
+    arr = input_arr[:]
+
     for i in range(len(arr)):
-        minIdx = i
+        min_idx = i
+
         for j in range(i + 1, len(arr)):
-            if arr[minIdx] > arr[j]:
-                minIdx = j
-        arr[i], arr[minIdx] = arr[minIdx], arr[i]
+            if arr[min_idx] > arr[j]:
+                min_idx = j
+
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
 
     return arr
 
