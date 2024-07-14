@@ -2,10 +2,11 @@ def sort(input_arr: list[int]) -> list[int]:
     arr = input_arr[:]
 
     for i in range(len(arr) - 1):
-        for j in range(i, -1, -1):
-            if arr[j] <= arr[j + 1]:
-                break
+        j = i
+
+        while j >= 0 and arr[j] > arr[j + 1]:
             arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            j -= 1
 
     return arr
 

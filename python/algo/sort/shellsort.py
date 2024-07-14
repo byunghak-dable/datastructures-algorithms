@@ -11,6 +11,7 @@ def sort(input_arr: list[int]) -> list[int]:
             while j >= gap and arr[j - gap] > temp:
                 arr[j] = arr[j - gap]
                 j -= gap
+
             arr[j] = temp
 
         gap //= 2
