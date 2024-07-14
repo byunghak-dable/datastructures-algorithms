@@ -1,40 +1,30 @@
-# TODO: fix to use copied array
+def sort(arr: list[int]) -> list[int]:
+    if len(arr) <= 1:
+        return arr[:]
+
+    mid = len(arr) // 2
+    left, right = sort(arr[:mid]), sort(arr[mid:])
+
+    return merge(left, right)
 
 
-def sort(arr: list[int]):
-    if len(arr) == 1:
-        return arr
+def merge(left: list[int], right: list[int]) -> list[int]:
+    sorted: list[int] = []
+    left_idx = right_idx = 0
 
-    midIdx = len(arr) // 2
-    left, right = arr[:midIdx], arr[midIdx:]
-
-    sort(left)
-    sort(right)
-    merge(arr, left, right)
-
-
-def merge(arr, lArr, rArr):
-    trav, lTrav, rTrav = 0, 0, 0
-    while lTrav != len(lArr) and rTrav != len(rArr):
-        lVal, rVal = lArr[lTrav], rArr[rTrav]
-        if lVal < rVal:
-            arr[trav] = lVal
-            lTrav += 1
+    while left_idx < len(left) and right_idx < len(right):
+        if left[left_idx] < right[right_idx]:
+            sorted.append(left[left_idx])
+            left_idx += 1
         else:
-            arr[trav] = rVal
-            rTrav += 1
-        trav += 1
-    (xArr, xTrav) = (rArr, rTrav) if lTrav == len(lArr) else (lArr, lTrav)
-    while xTrav != len(xArr):
-        arr[trav] = xArr[xTrav]
-        xTrav += 1
-        trav += 1
+            sorted.append(right[right_idx])
+            right_idx += 1
+
+    return sorted + left[left_idx:] + right[right_idx:]
 
 
 arr = [8, 5, 6, 2, 4]
+sorted_arr = sort(arr)
 
 print("original", arr)
-
-sort(arr)
-
-print("sorted", arr)
+print("soted", sorted_arr)
