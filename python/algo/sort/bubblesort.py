@@ -1,5 +1,5 @@
-def sort(original_arr: list[int]) -> list[int]:
-    arr = original_arr[:]
+def sort(input_arr: list[int]) -> list[int]:
+    arr = input_arr[:]
 
     for i in range(len(arr)):
         for j in range(len(arr) - i - 1):
